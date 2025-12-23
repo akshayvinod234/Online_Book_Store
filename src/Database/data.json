@@ -1,0 +1,274 @@
+{
+  "admins": [
+    {
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "id": "f64f"
+    }
+  ],
+  "users": [
+    {
+      "id": "eae7",
+      "username": "akshay",
+      "password": "akshay123",
+      "role": "user"
+    }
+  ],
+  "books": [
+    {
+      "id": "1",
+      "title": "Echoes of the Silent Valley",
+      "author": "Arjun Malhotra",
+      "genre": "Mystery",
+      "publishedYear": 2018,
+      "price": 399,
+      "rating": 4.3,
+      "pages": 320,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book1/300/450"
+    },
+    {
+      "id": "2",
+      "title": "The Last Code Breaker",
+      "author": "Meera Joshi",
+      "genre": "Technology",
+      "publishedYear": 2021,
+      "price": 499,
+      "rating": 4.6,
+      "pages": 410,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book2/300/450"
+    },
+    {
+      "id": "3",
+      "title": "Moonlight Over Jaipur",
+      "author": "Ritika Sharma",
+      "genre": "Romance",
+      "publishedYear": 2019,
+      "price": 299,
+      "rating": 4.1,
+      "pages": 280,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book3/300/450"
+    },
+    {
+      "id": "4",
+      "title": "Whispers in the Library",
+      "author": "Daniel Royce",
+      "genre": "Thriller",
+      "publishedYear": 2020,
+      "price": 450,
+      "rating": 4.4,
+      "pages": 360,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book4/300/450"
+    },
+    {
+      "id": "5",
+      "title": "Beyond the Binary Sky",
+      "author": "Kunal Verma",
+      "genre": "Science Fiction",
+      "publishedYear": 2022,
+      "price": 550,
+      "rating": 4.7,
+      "pages": 430,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book5/300/450"
+    },
+    {
+      "id": "6",
+      "title": "Roots of the Banyan Tree",
+      "author": "Ananya Iyer",
+      "genre": "Drama",
+      "publishedYear": 2017,
+      "price": 320,
+      "rating": 4,
+      "pages": 290,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book6/300/450"
+    },
+    {
+      "id": "7",
+      "title": "The Startup Blueprint",
+      "author": "Rohit Khanna",
+      "genre": "Business",
+      "publishedYear": 2023,
+      "price": 650,
+      "rating": 4.8,
+      "pages": 380,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book7/300/450"
+    },
+    {
+      "id": "8",
+      "title": "Letters Never Sent",
+      "author": "Sophia Martins",
+      "genre": "Romance",
+      "publishedYear": 2016,
+      "price": 280,
+      "rating": 3.9,
+      "pages": 250,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book8/300/450"
+    },
+    {
+      "id": "9",
+      "title": "The Quantum Notebook",
+      "author": "Neil Robertson",
+      "genre": "Science",
+      "publishedYear": 2021,
+      "price": 720,
+      "rating": 4.5,
+      "pages": 500,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book9/300/450"
+    },
+    {
+      "id": "10",
+      "title": "Shadows of the Forgotten City",
+      "author": "Ishaan Kapoor",
+      "genre": "Fantasy",
+      "publishedYear": 2020,
+      "price": 480,
+      "rating": 4.2,
+      "pages": 390,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book10/300/450"
+    },
+    {
+      "id": "11",
+      "title": "The Mindful Engineer",
+      "author": "Sandeep Reddy",
+      "genre": "Self-Help",
+      "publishedYear": 2022,
+      "price": 360,
+      "rating": 4.6,
+      "pages": 310,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book11/300/450"
+    },
+    {
+      "id": "12",
+      "title": "Parallel Lives",
+      "author": "Emily Carter",
+      "genre": "Drama",
+      "publishedYear": 2018,
+      "price": 340,
+      "rating": 4,
+      "pages": 295,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book12/300/450"
+    },
+    {
+      "id": "13",
+      "title": "The Crimson Algorithm",
+      "author": "Vikram Sen",
+      "genre": "Tech Thriller",
+      "publishedYear": 2023,
+      "price": 590,
+      "rating": 4.7,
+      "pages": 420,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book13/300/450"
+    },
+    {
+      "id": "14",
+      "title": "Winds of the Deccan",
+      "author": "Pallavi Deshmukh",
+      "genre": "Historical Fiction",
+      "publishedYear": 2019,
+      "price": 410,
+      "rating": 4.1,
+      "pages": 360,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book14/300/450"
+    },
+    {
+      "id": "15",
+      "title": "Debugging Life",
+      "author": "Amit Kulkarni",
+      "genre": "Self-Help",
+      "publishedYear": 2021,
+      "price": 300,
+      "rating": 4.3,
+      "pages": 270,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book15/300/450"
+    },
+    {
+      "id": "16",
+      "title": "Invisible Threads",
+      "author": "Lucas Bennett",
+      "genre": "Psychological",
+      "publishedYear": 2020,
+      "price": 470,
+      "rating": 4.4,
+      "pages": 350,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book16/300/450"
+    },
+    {
+      "id": "17",
+      "title": "AI and the Human Code",
+      "author": "Dr. Kavita Rao",
+      "genre": "Technology",
+      "publishedYear": 2024,
+      "price": 780,
+      "rating": 4.9,
+      "pages": 520,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book17/300/450"
+    },
+    {
+      "id": "18",
+      "title": "Fragments of Tomorrow",
+      "author": "Nisha Menon",
+      "genre": "Science Fiction",
+      "publishedYear": 2022,
+      "price": 520,
+      "rating": 4.5,
+      "pages": 410,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book18/300/450"
+    },
+    {
+      "id": "19",
+      "title": "The Silent Compiler",
+      "author": "Ravi Prakash",
+      "genre": "Tech Mystery",
+      "publishedYear": 2023,
+      "price": 610,
+      "rating": 4.6,
+      "pages": 380,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book19/300/450"
+    },
+    {
+      "id": "20",
+      "title": "The Final Commit",
+      "author": "Aaron Miles",
+      "genre": "Tech Thriller",
+      "publishedYear": 2024,
+      "price": 690,
+      "rating": 4.8,
+      "pages": 450,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book20/300/450"
+    }
+  ],
+  "carts": [
+    {
+      "id": "2",
+      "title": "The Last Code Breaker",
+      "author": "Meera Joshi",
+      "genre": "Technology",
+      "publishedYear": 2021,
+      "price": 499,
+      "rating": 4.6,
+      "pages": 410,
+      "language": "English",
+      "imageUrl": "https://picsum.photos/seed/book2/300/450"
+    }
+  ]
+}
