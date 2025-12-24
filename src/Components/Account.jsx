@@ -34,6 +34,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Auth } from "../Context/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const Account = () => {
   const { user, logout } = useContext(Auth);
@@ -47,6 +48,11 @@ const Account = () => {
         .catch((err) => console.log(err));
     }
   }, [user]);
+  console.log(user)
+  let navigate=useNavigate()
+function updateProfile(){
+  navigate(`/update-profile/${user._id}`)
+}
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
@@ -96,7 +102,6 @@ const Account = () => {
                   <span className="font-medium text-gray-600">Email:</span>{" "}
                   {user.email}
                 </p>
- 
                 <p>
                   <span className="font-medium text-gray-600">Account ID:</span>{" "}
                   {user._id}
@@ -109,7 +114,7 @@ const Account = () => {
                 <p className="text-sm text-gray-600">
                   {data?.address || "No address added yet"}
                 </p>
-                <button className="mt-3 text-sm text-teal-700 hover:underline">
+                <button onClick={updateProfile} className="mt-3 text-sm text-teal-700 hover:underline">
                   + Add / Edit Profile Details
                 </button>
               </div>

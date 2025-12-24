@@ -13,6 +13,7 @@ import AdminDashboard from './Components/AdminDashboard'
 import UpdateBook from './Components/UpdateBook'
 import AddBooks from './Components/AddBooks'
 import Account from './Components/Account'
+import UpadateProfile from './Components/UpadateProfile'
 
 const App = () => {
      let routes=createBrowserRouter([
@@ -56,6 +57,10 @@ const App = () => {
           {
            path:"account",
            element:<Account/>
+         },
+          {
+           path:"update-profile/:id",
+           element:<UpadateProfile/>
          }
         ]
       }])

@@ -58,7 +58,7 @@ let login=async()=>{
           }}
         >
           <img src={book} className="w-32 mx-auto mb-2" />
-          <h2 className="text-xl font-semibold mb-6">Sign On</h2>
+          <h2 className="text-xl font-semibold mb-6">Sign In</h2>
 
           <label className="block text-sm font-medium mb-1">Email</label>
           <input
@@ -78,7 +78,7 @@ let login=async()=>{
           />
 
           <button className="w-full bg-teal-800 text-white py-2 rounded-sm">
-            Sign On
+            Sign In
           </button>
 
           <p className="text-sm mt-4">
