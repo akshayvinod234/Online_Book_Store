@@ -27,6 +27,7 @@ import axios from "axios"
 import React, { useEffect, useState, useContext } from "react"
 import { Auth } from "../Context/AuthContext"
 import { toast } from "react-toastify"
+import { useNavigate } from "react-router"
 
 const UpdateProfile = () => {
   const { user } = useContext(Auth)
@@ -40,6 +41,8 @@ const UpdateProfile = () => {
 
   const [profileImg, setProfileImg] = useState(null)
   const [preview, setPreview] = useState("")
+
+
 
   // 🔹 Fetch user data
   useEffect(() => {
@@ -70,25 +73,27 @@ const UpdateProfile = () => {
     setProfileImg(file)
     setPreview(URL.createObjectURL(file))
   }
-
+let navigate=useNavigate()
   // 🔹 Update profile
   function handleUpdate(e) {
     e.preventDefault()
 
     const formData = new FormData()
+    formData.append("profileImg", userDetails.profileImg)
     formData.append("username", userDetails.username)
     formData.append("email", userDetails.email)
     formData.append("address", userDetails.address)
 
     if (profileImg) {
-      formData.append("profileimg", profileImg)
+      formData.append("profileImg", profileImg)
     }
 
     axios
-      .put(`http://localhost:5000/loginapi/update/${userId}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      .put(`http://localhost:5000/loginapi/login/${userId}`, formData)
+      .then(() => {
+        toast.success("Profile updated successfully ✅")
+        navigate("/account")
       })
-      .then(() => toast.success("Profile updated successfully ✅"))
       .catch(() => toast.error("Failed to update profile ❌"))
   }
 
@@ -121,6 +126,8 @@ const UpdateProfile = () => {
           <input
             type="file"
             accept="image/*"
+             name="profileImg"
+             value={userDetails.profileImg}
             onChange={handleFileChange}
             className="w-full px-3 py-2 border rounded-md"
           />

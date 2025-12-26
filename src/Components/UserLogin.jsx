@@ -7,7 +7,7 @@ import { Auth } from "../Context/AuthContext";
 
 const UserLogin = () => {
   let {Login}=useContext(Auth);
-  const { setShow } = useOutletContext()
+
 
   let [users, setUsers] = useState([]);
   let [user, setUser] = useState({
@@ -41,7 +41,7 @@ let login=async()=>{
   if (matchedUser) {
     Login(matchedUser);
     toast.success("Login Successful");
-    setShow(true);
+
     navigate("/");
   } else {
     toast.error("Invalid Credentials");

@@ -6,11 +6,13 @@ import { useOutletContext } from 'react-router-dom'
 import Additional from "./Additional"
 import { toast } from 'react-toastify'
 import { Auth } from '../Context/AuthContext'
+import { CartData } from '../Context/CartContext'
 
 
 const Dashboard = () => {
-
-  const { search, setCartCount,additional} = useOutletContext()
+  let {addToCart}=useContext(CartData)
+  const { search,additional} = useOutletContext()
+  let {setCartCount}=useContext(Auth)
   const [books, setBooks] = useState([])
 
   useEffect(() =>{
@@ -31,21 +33,21 @@ const Dashboard = () => {
     )
   })
 
-function cartdata(item) {
-  axios.get("http://localhost:5000/cartapi/cart")
-    .then(res => {
-      toast.success("Book added to cart")
-      const exists = res.data.payload.some(cart => cart._id === item._id)
-      if (exists) {
-        return
-      }
-      axios.post("http://localhost:5000/cartapi/cart", item)
-        .then(() => {
-          setCartCount(prev => prev + 1)
-        })
-    })
-    .catch(err => console.log(err))
-}
+// function cartdata(item) {
+//   axios.get("http://localhost:5000/cartapi/cart")
+//     .then(res => {
+//       toast.success("Book added to cart")
+//       const exists = res.data.payload.some(cart => cart._id === item._id)
+//       if (exists) {
+//         return
+//       }
+//       axios.post("http://localhost:5000/cartapi/cart", item)
+//         .then(() => {
+//           setCartCount(prev => prev + 1)
+//         })
+//     })
+//     .catch(err => console.log(err))
+// }
      
   return (
     <div className="max-w-7xl mx-auto px-6 py-6">
@@ -88,7 +90,7 @@ function cartdata(item) {
               </p>
 
               <button
-                onClick={() => cartdata(item)}
+                onClick={() => addToCart(item)}
                 className="mt-2 w-full border border-blue-600 text-blue-600 text-xs py-1.5 rounded hover:bg-blue-600 hover:text-white transition"
               >
                 Add to Cart

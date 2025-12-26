@@ -1,10 +1,11 @@
 import axios from "axios"
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useOutletContext } from "react-router-dom"
+import { Auth } from "../Context/AuthContext"
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([])
-  const { setCartCount } = useOutletContext()
+  let {setCartCount ,user}=useContext(Auth)
 
 
   useEffect(() => {
@@ -34,10 +35,6 @@ function decreaseQty(id) {
     )
   )
 }
-
-
-
-
 const shippingCost = 32.67
 const subtotal = cartItems.reduce(
   (sum, item) => sum + item.price * (item.quantity || 1),
@@ -57,6 +54,34 @@ const total = subtotal + shippingCost
     .catch(err => console.log(err))
 }
 
+const checkoutHandler=async(amount)=>{
+    const {data:KeyData}=await axios.get("http://localhost:5000/api/v1/getKey")
+    const {key}=KeyData
+    console.log(key)
+  const {data:orderData}=await axios.post("http://localhost:5000/api/v1/payment/process",{amount})
+          const {order}=orderData
+    console.log(order)
+    const options = {
+        key,
+        amount,
+        currency: 'INR',
+        name: user.username, 
+        description: 'Test Transaction',
+        order_id: order.id,
+        callback_url: "/api/v1/paymentVerification",
+        prefill: {
+          name: 'Akshay Vinod',
+          email: 'akshay@example.com',
+          contact: '9999999999'
+        },
+        theme: {
+          color: '#F37254'
+        },
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+}
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-6">
@@ -171,7 +196,7 @@ const total = subtotal + shippingCost
             <span>₹ {total}</span>
           </div>
 
-          <button className="w-full bg-red-600 text-white py-3 rounded-full font-semibold hover:bg-red-700">
+          <button onClick={()=>{checkoutHandler(total)}}className="w-full bg-red-600 text-white py-3 rounded-full font-semibold hover:bg-red-700">
             Proceed to checkout
           </button>
         </div>

@@ -14,6 +14,7 @@ import UpdateBook from './Components/UpdateBook'
 import AddBooks from './Components/AddBooks'
 import Account from './Components/Account'
 import UpadateProfile from './Components/UpadateProfile'
+import PaymentSuccefull from './Components/PaymentSuccefull'
 
 const App = () => {
      let routes=createBrowserRouter([
@@ -33,6 +34,10 @@ const App = () => {
       {
         path:"/addbooks",
         element:<AddBooks/>
+      },
+      {
+        path:"/paymentSuccess",
+        element:<PaymentSuccefull/>
       },
       {
         path:"/",

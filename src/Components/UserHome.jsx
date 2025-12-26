@@ -26,9 +26,9 @@ import axios from "axios"
 import Footer from "./Footer"
 
 const UserHome = () => {
-  let [show,setShow]=useState(false)
+  // let [show,setShow]=useState(false)
   const [search, setSearch] = useState("")
-  const [cartCount, setCartCount] = useState(0)
+  // const [cartCount, setCartCount] = useState(0)
   const [additional,setAdditional]=useState(true)
   
 
@@ -40,8 +40,8 @@ const UserHome = () => {
 
   return (
     <>
-      <Navbar setSearch={setSearch} cartCount={cartCount} show={show} setAdditional={setAdditional} />
-      <Outlet context={{ search,setCartCount,setShow,additional}} />
+      <Navbar setSearch={setSearch}  setAdditional={setAdditional} />
+      <Outlet context={{ search,additional}} />
       <Footer />
     </>
   )

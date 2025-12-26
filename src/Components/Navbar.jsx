@@ -3,8 +3,9 @@ import book from "../../public/booklogo.png"
 import { Link } from "react-router-dom"
 import { Auth } from "../Context/AuthContext";
 
-const Navbar = ({ setSearch, cartCount ,show,setAdditional}) => {
+const Navbar = ({ setSearch,setAdditional}) => {
       let {user}=useContext(Auth);
+      let {cartCount}=useContext(Auth)
   function handleShow(e){
     setSearch(e.target.value)
     if(e.target.value===""){

@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import axios from "axios";
 import book from "../../public/booklogo.png";
 import {toast} from "react-toastify"
+import { useNavigate } from "react-router";
 
 const UserSignin = () => {
   let [user, setUser] = useState({
+    profileImg:"",
     username: "",
     email: "",
     password: "",
-    confirmpwd:""
+    confirmpwd:"",
+    address:""
   });
-
+let navigate=useNavigate()
   function signup(e) {
     e.preventDefault(); 
     if(user.username.trim() && user.password.trim() ){
@@ -27,6 +30,7 @@ const UserSignin = () => {
     password: "",
     confirmpwd:""
   })
+  navigate("/userlogin")
       })
       .catch((err) => {
         console.log(err);

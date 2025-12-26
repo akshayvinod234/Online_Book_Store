@@ -5,6 +5,8 @@ const AuthContext = ({children}) => {
       let [user , setUser] = useState(()=>{
     return localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):null
    })
+     const [cartCount, setCartCount] = useState(0)
+   
     let Login = (loginDetails)=>{
         setUser(loginDetails)
         localStorage.setItem('user' ,JSON.stringify(loginDetails) )
@@ -17,7 +19,7 @@ const AuthContext = ({children}) => {
     }
   return (
     
-      <Auth.Provider value={{Login,user,logout}}>{children}</Auth.Provider>
+      <Auth.Provider value={{Login,user,logout,cartCount,setCartCount}}>{children}</Auth.Provider>
     
   )
 }

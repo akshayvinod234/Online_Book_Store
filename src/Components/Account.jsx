@@ -1,35 +1,4 @@
-// import React, { use, useContext, useEffect, useState } from 'react'
-// import { Auth } from '../Context/AuthContext';
-// import axios from 'axios';
 
-// const Account = () => {
-//   let {user,logout}=useContext(Auth);
-//   let [data,setData]=useState([]);
-//   useEffect(()=>{
-//     axios.get(`http://localhost:5000/loginapi/login/${user._id}`)
-//     .then((res)=>setData(res.data.payload))
-//     .catch((err)=>console.log(err))
-//   },[])
-//   console.log(data)
-//   return (
-//     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-//       <div className="w-full max-w-md bg-white border rounded-md p-6 shadow-sm">
-//         <h2 className="text-2xl font-semibold mb-4">My Account</h2>
-//         {user ? (
-//           <div>
-//             <p className="mb-2"><strong>Username:</strong> {user.username}</p>
-//             <p className="mb-2"><strong>Email:</strong> {user.email}</p>
-//             <button onClick={logout}>Logout</button>
-//           </div>
-//         ) : (
-//           <p>No user information available.</p>
-//         )}
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Account
 
 import React, { useContext, useEffect, useState } from "react";
 import { Auth } from "../Context/AuthContext";
@@ -39,6 +8,7 @@ import { useNavigate } from "react-router";
 const Account = () => {
   const { user, logout } = useContext(Auth);
   const [data, setData] = useState(null);
+  let {cartCount}=useContext(Auth)
 
   useEffect(() => {
     if (user?._id) {
@@ -48,7 +18,7 @@ const Account = () => {
         .catch((err) => console.log(err));
     }
   }, [user]);
-  console.log(user)
+  console.log(data)
   let navigate=useNavigate()
 function updateProfile(){
   navigate(`/update-profile/${user._id}`)
@@ -71,8 +41,8 @@ function updateProfile(){
 
             {/* Profile Card */}
             <div className="border rounded-lg p-4 flex flex-col items-center text-center">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+              <img src={data?.profileImg?`http://localhost:5000/uploads/${data?.profileImg}`
+                :"https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
                 alt="User Avatar"
                 className="w-24 h-24 rounded-full border mb-3"
               />
@@ -131,7 +101,7 @@ function updateProfile(){
 
               <div className="border rounded-lg p-4 text-center">
                 <p className="text-2xl font-bold text-teal-700">
-                  {data?.cartItems || 0}
+                  {cartCount || 0}
                 </p>
                 <p className="text-sm text-gray-500">Cart Items</p>
               </div>
