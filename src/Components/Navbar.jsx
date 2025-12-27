@@ -2,10 +2,11 @@ import React, { useContext } from "react"
 import book from "../../public/booklogo.png"
 import { Link } from "react-router-dom"
 import { Auth } from "../Context/AuthContext";
+import { CartData } from "../Context/CartContext";
 
 const Navbar = ({ setSearch,setAdditional}) => {
       let {user}=useContext(Auth);
-      let {cartCount}=useContext(Auth)
+      let {cartCounts}=useContext(CartData)
   function handleShow(e){
     setSearch(e.target.value)
     if(e.target.value===""){
@@ -14,7 +15,7 @@ const Navbar = ({ setSearch,setAdditional}) => {
     }
     setAdditional(false)
   }
-  console.log(cartCount )
+  
   return (
     <nav className="w-full bg-white border-b">
       <div className="max-w-7xl mx-auto flex items-center px-5 py-1.5 gap-4">
@@ -42,7 +43,9 @@ const Navbar = ({ setSearch,setAdditional}) => {
         { !user && (<Link className="px-2 py-0.5 border rounded hover:bg-gray-100" to="/userlogin">
             Sign in
           </Link>)}
-
+          <Link to="/" className="px-2 py-0.5 border rounded hover:bg-gray-100">
+            home
+          </Link>
           {user && (<Link to="/account" className="px-2 py-0.5 border rounded hover:bg-gray-100">
             My Account
           </Link>)}
@@ -53,9 +56,9 @@ const Navbar = ({ setSearch,setAdditional}) => {
             className="relative px-2 py-0.5 border rounded hover:bg-gray-100"
           >
             Basket 🛒
-            {cartCount > 0 && (
+            {cartCounts > 0 && user && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
-                {cartCount}
+                {cartCounts}
               </span>
             )}
           </Link>

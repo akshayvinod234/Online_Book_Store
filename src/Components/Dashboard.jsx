@@ -5,14 +5,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Additional from "./Additional"
 import { toast } from 'react-toastify'
-import { Auth } from '../Context/AuthContext'
 import { CartData } from '../Context/CartContext'
 
 
 const Dashboard = () => {
   let {addToCart}=useContext(CartData)
   const { search,additional} = useOutletContext()
-  let {setCartCount}=useContext(Auth)
+
   const [books, setBooks] = useState([])
 
   useEffect(() =>{
@@ -33,21 +32,6 @@ const Dashboard = () => {
     )
   })
 
-// function cartdata(item) {
-//   axios.get("http://localhost:5000/cartapi/cart")
-//     .then(res => {
-//       toast.success("Book added to cart")
-//       const exists = res.data.payload.some(cart => cart._id === item._id)
-//       if (exists) {
-//         return
-//       }
-//       axios.post("http://localhost:5000/cartapi/cart", item)
-//         .then(() => {
-//           setCartCount(prev => prev + 1)
-//         })
-//     })
-//     .catch(err => console.log(err))
-// }
      
   return (
     <div className="max-w-7xl mx-auto px-6 py-6">

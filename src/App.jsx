@@ -15,6 +15,7 @@ import AddBooks from './Components/AddBooks'
 import Account from './Components/Account'
 import UpadateProfile from './Components/UpadateProfile'
 import PaymentSuccefull from './Components/PaymentSuccefull'
+import UserOrder from './Components/UserOrder'
 
 const App = () => {
      let routes=createBrowserRouter([
@@ -62,6 +63,10 @@ const App = () => {
           {
            path:"account",
            element:<Account/>
+         },
+          {
+           path:"order",
+           element:<UserOrder/>
          },
           {
            path:"update-profile/:id",

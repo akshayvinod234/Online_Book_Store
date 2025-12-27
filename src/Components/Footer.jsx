@@ -24,7 +24,7 @@ const Footer = () => {
             <li className="hover:underline cursor-pointer">Advanced Search</li>
             <li className="hover:underline cursor-pointer">Browse Collections</li>
             <li className="hover:underline cursor-pointer"><Link to="/account">My Account</Link></li>
-            <li className="hover:underline cursor-pointer">My Orders</li>
+            <li className="hover:underline cursor-pointer"><Link to="/order">My Orders</Link></li>
             <li className="hover:underline cursor-pointer"><Link to="/cart">View Basket</Link></li>
           </ul>
         </div>

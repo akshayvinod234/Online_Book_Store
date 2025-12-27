@@ -3,27 +3,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Auth } from "../Context/AuthContext";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { CartData } from "../Context/CartContext";
 
 const Account = () => {
   const { user, logout } = useContext(Auth);
   const [data, setData] = useState(null);
-  let {cartCount}=useContext(Auth)
+  const {cartCounts,order,fetchOrders}=useContext(CartData)
 
   useEffect(() => {
     if (user?._id) {
+      fetchOrders(user._id)
       axios
         .get(`http://localhost:5000/loginapi/login/${user._id}`)
-        .then((res) => setData(res.data.payload))
+        .then((res) => {setData(res.data.payload)
+        })
         .catch((err) => console.log(err));
     }
   }, [user]);
-  console.log(data)
   let navigate=useNavigate()
 function updateProfile(){
   navigate(`/update-profile/${user._id}`)
 }
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg overflow-hidden">
@@ -94,14 +95,14 @@ function updateProfile(){
             <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="border rounded-lg p-4 text-center">
                 <p className="text-2xl font-bold text-teal-700">
-                  {data?.orders || 0}
+                  {order.length || 0}
                 </p>
-                <p className="text-sm text-gray-500">Orders</p>
+                <p className="text-sm text-gray-500"><Link to="/order">Orders</Link></p>
               </div>
 
               <div className="border rounded-lg p-4 text-center">
                 <p className="text-2xl font-bold text-teal-700">
-                  {cartCount || 0}
+                  {cartCounts || 0}
                 </p>
                 <p className="text-sm text-gray-500">Cart Items</p>
               </div>

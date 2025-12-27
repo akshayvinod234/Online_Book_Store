@@ -1,21 +1,32 @@
 import axios from "axios"
 import React, { useContext, useEffect, useState } from "react"
-import { useOutletContext } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
 import { Auth } from "../Context/AuthContext"
+import { CartData } from "../Context/CartContext"
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([])
-  let {setCartCount ,user}=useContext(Auth)
 
+  let {user}=useContext(Auth)
+  let{cartItems,setCartItems,order,setOrder}=useContext(CartData)
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/cartapi/cart")
-      .then((res) => setCartItems(res.data.payload))
-      .catch((err) => console.log(err))
-  }, [])
-  console.log(cartItems)
+  let getCart = async()=>{
+      let result = await axios.get(`http://localhost:5000/cartapi/cart`)
+      let data=result.data.payload.filter((item)=>{
+        return item.userId==user._id
+      })
+      setCartItems(data)
+  }
+  useEffect(()=>{
+       getCart()
+  } , [])
 
+  const removeFromCart = async (id) => {
+    await axios.delete(`http://localhost:5000/cartapi/cart/${id}`)
+    setCartItems((prev) => prev.filter((item) => item._id !== id))
+  }
+
+console.log(cartItems)
+console.log(user._id)
 function increaseQty(id) {
   setCartItems(prev =>
     prev.map(item =>
@@ -42,25 +53,15 @@ const subtotal = cartItems.reduce(
 )
 const total = subtotal + shippingCost
 
-  function delete_cartitems(id) {
-  axios.delete(`http://localhost:5000/cartapi/cart/${id}`)
-    .then(() => {
-      setCartItems(prev => {
-        const updated = prev.filter(item => item._id !== id)
-        setCartCount(updated.length)
-        return updated
-      })
-    })
-    .catch(err => console.log(err))
-}
-
+let navigate=useNavigate()
 const checkoutHandler=async(amount)=>{
+  if(user){
     const {data:KeyData}=await axios.get("http://localhost:5000/api/v1/getKey")
     const {key}=KeyData
     console.log(key)
   const {data:orderData}=await axios.post("http://localhost:5000/api/v1/payment/process",{amount})
           const {order}=orderData
-    console.log(order)
+
     const options = {
         key,
         amount,
@@ -81,6 +82,32 @@ const checkoutHandler=async(amount)=>{
 
       const rzp = new Razorpay(options);
       rzp.open();
+// const items = cartItems.map(item => ({
+//   title: item.title,
+//   author: item.author,
+//   genre:item.genre,
+//   publishedYear:item.publishedYear,
+//   rating:item.rating,
+//   pages:item.pages,
+//   price: item.price,
+//   imageUrl: item.imageUrl,
+// }))
+//   // console.log(items)
+//      let hello=items.map((el)=>{
+//   return  axios.post("http://localhost:5000/orderapi/order",{...el,userId: user._id})
+//      })
+// const responses = await Promise.all(hello)
+
+// // const payloads = responses.map(res => res.data.payload)
+// // console.log(payloads)
+//  let hehe= await axios.get(`http://localhost:5000/orderapi/order/user/${user._id}`)
+//  console.log(hehe.data.payload)
+//  setOrder(hehe.data.payload)
+
+    }
+    else{
+      navigate("/userlogin")
+    }
 }
 
   return (
@@ -95,7 +122,7 @@ const checkoutHandler=async(amount)=>{
         <div className="lg:col-span-2 border rounded-md p-5 bg-white">
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
-              <div key={item.id} className="border-b pb-5 mb-5">
+              <div key={item._id} className="border-b pb-5 mb-5">
                 <div className="flex gap-5">
                   {/* <img
                     src={item.imageUrl}
@@ -147,7 +174,7 @@ const checkoutHandler=async(amount)=>{
                       <span className="cursor-pointer hover:underline">
                         Save for later
                       </span>
-                      <button className="cursor-pointer hover:underline" onClick={()=>{delete_cartitems(item._id)}}>
+                      <button className="cursor-pointer hover:underline" onClick={()=>{removeFromCart(item._id)}}>
                         Delete
                       </button>
                       <span className="cursor-pointer hover:underline">

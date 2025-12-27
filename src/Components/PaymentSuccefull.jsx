@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
+import  { CartData } from "../Context/CartContext";
+import axios from "axios";
+import { Auth } from "../Context/AuthContext";
 
 const PaymentSuccefull = () => {
+  let {user}=useContext(Auth)
+  let{cartItems,setCartItems,order,setOrder}=useContext(CartData)
+  // console.log(items)
+  useEffect(() => {
+    if (!user || cartItems.length === 0) return
+
+    const saveOrder = async () => {
+      const items = cartItems.map(item => ({
+        title: item.title,
+        author: item.author,
+        genre: item.genre,
+        publishedYear: item.publishedYear,
+        rating: item.rating,
+        pages: item.pages,
+        price: item.price,
+        imageUrl: item.imageUrl,
+        bookId:item.bookId,
+        userId: user._id
+      }))
+
+      await Promise.all(
+        items.map(el =>
+          axios.post("http://localhost:5000/orderapi/order", el)
+        )
+      )
+
+      const res = await axios.get(
+        `http://localhost:5000/orderapi/order/user/${user._id}`
+      )
+      setOrder(res.data.payload)
+
+      await axios.delete(`http://localhost:5000/cartapi/cart/user/${user._id}`)
+       setCartItems([])
+    }
+
+    saveOrder()
+  }, [user, cartItems])
+
   const query = new URLSearchParams(useLocation().search);
   const reference = query.get("reference");
 

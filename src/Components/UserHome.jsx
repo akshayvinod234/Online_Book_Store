@@ -19,14 +19,16 @@
    
 //    export default UserHome
    
-   import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
 import Navbar from "../Components/Navbar"
 import axios from "axios"
 import Footer from "./Footer"
+import { Auth } from "../Context/AuthContext"
 
 const UserHome = () => {
   // let [show,setShow]=useState(false)
+  let {setCartCount}=useContext(Auth)
   const [search, setSearch] = useState("")
   // const [cartCount, setCartCount] = useState(0)
   const [additional,setAdditional]=useState(true)

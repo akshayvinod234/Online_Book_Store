@@ -11,8 +11,6 @@ const AuthContext = ({children}) => {
         setUser(loginDetails)
         localStorage.setItem('user' ,JSON.stringify(loginDetails) )
     }
-    console.log(user);
-
     let logout = ()=>{
         setUser(null)
         localStorage.removeItem('user')
