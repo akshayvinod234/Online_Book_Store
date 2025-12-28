@@ -92,29 +92,27 @@ function updateProfile(){
             </div>
 
             {/* Stats Section */}
-            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="border rounded-lg p-4 text-center">
-                <p className="text-2xl font-bold text-teal-700">
-                  {order.length || 0}
-                </p>
-                <p className="text-sm text-gray-500"><Link to="/order">Orders</Link></p>
-              </div>
+<div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-4 gap-4">
 
-              <div className="border rounded-lg p-4 text-center">
-                <p className="text-2xl font-bold text-teal-700">
-                  {cartCounts || 0}
-                </p>
-                <p className="text-sm text-gray-500">Cart Items</p>
-              </div>
 
-              <div className="border rounded-lg p-4 text-center">
-                <p className="text-2xl font-bold text-teal-700">
-                  {data?.wishlist || 0}
-                </p>
-                <p className="text-sm text-gray-500">Wishlist</p>
-              </div>
-            </div>
-          </div>
+  <div className="border rounded-lg p-4 text-center sm:col-span-2">
+    <p className="text-3xl font-bold text-teal-700">
+      {order.length || 0}
+    </p>
+    <p className="text-sm text-gray-500">
+      <Link to="/order">Orders</Link>
+    </p>
+  </div>
+
+  <div className="border rounded-lg p-4 text-center sm:col-span-2">
+    <p className="text-3xl font-bold text-teal-700">
+      {cartCounts || 0}
+    </p>
+    <p className="text-sm text-gray-500">Cart Items</p>
+  </div>
+
+</div>
+</div>
         ) : (
           <div className="p-6 text-center text-gray-600">
             No user information available.

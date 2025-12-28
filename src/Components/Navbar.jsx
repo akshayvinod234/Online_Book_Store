@@ -62,10 +62,6 @@ const Navbar = ({ setSearch,setAdditional}) => {
               </span>
             )}
           </Link>
-          <Link className="px-2 py-0.5 border rounded hover:bg-gray-100">
-            Help
-          </Link>
-
         </div>
       </div>
     </nav>

@@ -8,6 +8,21 @@ const Cart = () => {
 
   let {user}=useContext(Auth)
   let{cartItems,setCartItems,order,setOrder}=useContext(CartData)
+  const [shippingCost, setShippingCost] = useState(32.67)
+
+  const shippingOptions = [
+  {
+    id: "standard",
+    label: "Standard shipping – 14 to 28 business days",
+    cost: 32.67,
+  },
+  {
+    id: "priority",
+    label: "Priority shipping – 1 to 7 business days",
+    cost: 122.54,
+  },
+]
+
 
   let getCart = async()=>{
       let result = await axios.get(`http://localhost:5000/cartapi/cart`)
@@ -25,8 +40,7 @@ const Cart = () => {
     setCartItems((prev) => prev.filter((item) => item._id !== id))
   }
 
-console.log(cartItems)
-console.log(user._id)
+
 function increaseQty(id) {
   setCartItems(prev =>
     prev.map(item =>
@@ -46,7 +60,7 @@ function decreaseQty(id) {
     )
   )
 }
-const shippingCost = 32.67
+
 const subtotal = cartItems.reduce(
   (sum, item) => sum + item.price * (item.quantity || 1),
   0
@@ -82,27 +96,6 @@ const checkoutHandler=async(amount)=>{
 
       const rzp = new Razorpay(options);
       rzp.open();
-// const items = cartItems.map(item => ({
-//   title: item.title,
-//   author: item.author,
-//   genre:item.genre,
-//   publishedYear:item.publishedYear,
-//   rating:item.rating,
-//   pages:item.pages,
-//   price: item.price,
-//   imageUrl: item.imageUrl,
-// }))
-//   // console.log(items)
-//      let hello=items.map((el)=>{
-//   return  axios.post("http://localhost:5000/orderapi/order",{...el,userId: user._id})
-//      })
-// const responses = await Promise.all(hello)
-
-// // const payloads = responses.map(res => res.data.payload)
-// // console.log(payloads)
-//  let hehe= await axios.get(`http://localhost:5000/orderapi/order/user/${user._id}`)
-//  console.log(hehe.data.payload)
-//  setOrder(hehe.data.payload)
 
     }
     else{
@@ -171,15 +164,11 @@ const checkoutHandler=async(amount)=>{
                     <p className="text-gray-500 mt-2">1 available</p>
 
                     <div className="mt-3 flex gap-6 text-sm text-blue-600">
-                      <span className="cursor-pointer hover:underline">
-                        Save for later
-                      </span>
+
                       <button className="cursor-pointer hover:underline" onClick={()=>{removeFromCart(item._id)}}>
                         Delete
                       </button>
-                      <span className="cursor-pointer hover:underline">
-                        Contact seller
-                      </span>
+
                     </div>
                   </div>
 
@@ -197,24 +186,29 @@ const checkoutHandler=async(amount)=>{
           )}
 
           <div className="border-t pt-5">
-            <h3 className="font-semibold mb-3">
-              Choose a shipping option
-            </h3>
+  <h3 className="font-semibold mb-3">
+    Choose a shipping option
+  </h3>
 
-            <label className="flex items-center gap-3 mb-2 text-sm">
-              <input type="radio" checked readOnly />
-              <span>
-                <strong>₹ 32.67</strong> – Standard shipping – 14 to 28 business days
-              </span>
-            </label>
+  {shippingOptions.map((option) => (
+    <label
+      key={option.id}
+      className="flex items-center gap-3 mb-2 text-sm cursor-pointer"
+    >
+      <input
+        type="radio"
+        name="shipping"
+        value={option.cost}
+        checked={shippingCost === option.cost}
+        onChange={() => setShippingCost(option.cost)}
+      />
+      <span>
+        <strong>₹ {option.cost}</strong> – {option.label}
+      </span>
+    </label>
+  ))}
+</div>
 
-            <label className="flex items-center gap-3 text-sm">
-              <input type="radio" />
-              <span>
-                <strong>₹ 122.54</strong> – Priority shipping – 14 to 28 business days
-              </span>
-            </label>
-          </div>
         </div>
 
         <div className="border rounded-md p-5 bg-white h-fit">
